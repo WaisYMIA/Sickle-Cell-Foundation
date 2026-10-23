@@ -1,0 +1,27 @@
+Fix badly-cropped hero/banner photos on Sponsor and Impact pages (v0.3.2)
+
+The Sponsor and Impact page banners used a fixed-height, full-width box
+with background-position: center (or an under-tuned, uncommitted
+override) against source photos where the child's face sat well above
+center. At common desktop widths this cropped the face out entirely,
+leaving only a neck/collar on Sponsor and a doctor's coat on Impact -
+reported directly as hero/header images being "so much cropped."
+
+Measured each source image's actual face position with a pixel grid,
+then derived and empirically verified (at 400/768/1280/1920px) a
+background-position offset that keeps the face in frame at every width:
+sponsor.html/sw to "center 27%", impact.html/sw to "center 30%". Checked
+every other banner and the home hero the same way; no other page showed
+the defect.
+
+Also documents, in OPEN_ITEMS.md, two things intentionally left
+unchanged: About and Blog still have no banner photo, and Blog has no
+imagery at all - both flagged in a design review, neither fixed here
+since closing them needs either new photography or a judgment call on
+reusing existing photos.
+
+Re-ran the 146-check bilingual Playwright suite: no regressions.
+Bumped version to 0.3.2 and restamped all pages.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Ua9nwer7b5Gz37ymiXSHBT
